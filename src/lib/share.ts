@@ -1,16 +1,14 @@
-import type { BracketSize, NameCategory, NameEntry } from "../types";
+import type { BracketSize, NameEntry } from "../types";
 
 interface SharePayload {
   n: string[]; // names
   s: number[]; // indices of starred names
   z: BracketSize; // target size
-  c: NameCategory;
 }
 
 export interface ShortlistState {
   names: NameEntry[];
   size: BracketSize;
-  category: NameCategory;
 }
 
 const PARAM = "shortlist";
@@ -35,7 +33,6 @@ export function encodeShortlist(state: ShortlistState): string {
     n: state.names.map((x) => x.name),
     s: state.names.flatMap((x, i) => (x.starred ? [i] : [])),
     z: state.size,
-    c: state.category,
   };
   return toBase64(JSON.stringify(payload));
 }
@@ -55,7 +52,6 @@ export function readShortlistFromUrl(): ShortlistState | null {
     return {
       names: payload.n.map((name, i) => ({ id: newId(), name, starred: starred.has(i) })),
       size: payload.z,
-      category: payload.c,
     };
   } catch {
     return null;

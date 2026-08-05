@@ -28,16 +28,13 @@ export default function App() {
             <ShortlistView
               names={t.names}
               size={t.size}
-              category={t.category}
               canStart={t.canStart}
-              minNames={t.minNames}
               starredCount={t.starredCount}
               onAdd={t.addName}
               onRemove={t.removeName}
               onToggleStar={t.toggleStar}
               onClear={t.clearAll}
               onSetSize={t.setSize}
-              onSetCategory={t.setCategory}
               onStart={t.start}
             />
           </motion.div>

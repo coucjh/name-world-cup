@@ -54,21 +54,21 @@ describe("buildBracket", () => {
 
 describe("pickWinner / full playthrough", () => {
   it("crowns the top seed when the better seed always wins (full 32)", () => {
-    const t = createTournament(makeNames(32, 4), 32, "baby");
+    const t = createTournament(makeNames(32, 4), 32);
     const done = playFavouredSeed(t);
     expect(done.champion).toBeDefined();
     expect(done.champion!.seed).toBe(1);
   });
 
   it("handles a bye-filled bracket to a champion", () => {
-    const t = createTournament(makeNames(11, 2), 16, "baby");
+    const t = createTournament(makeNames(11, 2), 16);
     const done = playFavouredSeed(t);
     expect(done.champion).toBeDefined();
     expect(done.champion!.seed).toBe(1);
   });
 
   it("ignores an already-decided match", () => {
-    const t = createTournament(makeNames(8), 8, "pet");
+    const t = createTournament(makeNames(8), 8);
     const m = t.rounds[0][0];
     const once = pickWinner(t, m.id, m.a!.id);
     const twice = pickWinner(once, m.id, m.b!.id);
@@ -77,7 +77,7 @@ describe("pickWinner / full playthrough", () => {
   });
 
   it("has no pending match once a champion exists", () => {
-    const t = createTournament(makeNames(8), 8, "baby");
+    const t = createTournament(makeNames(8), 8);
     const done = playFavouredSeed(t);
     expect(findNextPending(done.rounds)).toBeNull();
   });

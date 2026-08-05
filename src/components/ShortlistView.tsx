@@ -1,29 +1,26 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Star, X, Trophy, Sparkles, Trash2 } from "lucide-react";
-import type { BracketSize, NameCategory, NameEntry } from "../types";
+import type { BracketSize, NameEntry } from "../types";
 import SuggestionLibrary from "./SuggestionLibrary";
 
 interface Props {
   names: NameEntry[];
   size: BracketSize;
-  category: NameCategory;
   canStart: boolean;
-  minNames: number;
   starredCount: number;
   onAdd: (name: string) => boolean;
   onRemove: (id: string) => void;
   onToggleStar: (id: string) => void;
   onClear: () => void;
   onSetSize: (size: BracketSize) => void;
-  onSetCategory: (c: NameCategory) => void;
   onStart: () => void;
 }
 
 const SIZES: BracketSize[] = [8, 16, 32];
 
 export default function ShortlistView(props: Props) {
-  const { names, size, category, canStart, minNames, starredCount } = props;
+  const { names, size, canStart, starredCount } = props;
   const [draft, setDraft] = useState("");
 
   const existing = useMemo(
@@ -55,28 +52,10 @@ export default function ShortlistView(props: Props) {
       </header>
 
       {/* Setup controls */}
-      <section className="mt-8 grid gap-3 sm:grid-cols-2">
+      <section className="mt-8">
         <div className="rounded-2xl border-2 border-ink bg-white/60 p-3 shadow-card-sm">
           <p className="mb-2 text-xs font-bold uppercase tracking-wider text-ink/50">
-            Naming a…
-          </p>
-          <div className="flex gap-2">
-            {(["baby", "pet"] as NameCategory[]).map((c) => (
-              <button
-                key={c}
-                onClick={() => props.onSetCategory(c)}
-                className={`flex-1 rounded-xl border-2 border-ink px-3 py-2 text-sm font-extrabold capitalize transition active:translate-y-0.5 ${
-                  category === c ? "bg-coral text-white" : "bg-paper hover:bg-gold/40"
-                }`}
-              >
-                {c === "baby" ? "👶 Baby" : "🐾 Pet"}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="rounded-2xl border-2 border-ink bg-white/60 p-3 shadow-card-sm">
-          <p className="mb-2 text-xs font-bold uppercase tracking-wider text-ink/50">
-            Bracket size
+            How many names?
           </p>
           <div className="flex gap-2">
             {SIZES.map((s) => (
@@ -188,15 +167,15 @@ export default function ShortlistView(props: Props) {
       <footer className="sticky bottom-4 mt-8">
         <div className="flex flex-col items-center gap-2 rounded-2xl border-2 border-ink bg-white p-3 shadow-card sm:flex-row sm:justify-between">
           <p className="px-2 text-sm font-medium text-ink/70">
-            {starredCount > 0 ? (
+            {!canStart ? (
+              `${size - names.length} more name${size - names.length === 1 ? "" : "s"} to fill the bracket`
+            ) : starredCount > 0 ? (
               <>
                 <Sparkles size={14} className="mb-0.5 mr-1 inline text-gold" />
                 {starredCount} favourite{starredCount > 1 ? "s" : ""} seeded apart
               </>
-            ) : canStart ? (
-              "Tip: ⭐ a few favourites so they don't clash early"
             ) : (
-              `Add at least ${minNames} names to kick off`
+              "Tip: ⭐ a few favourites so they don't clash early"
             )}
           </p>
           <button

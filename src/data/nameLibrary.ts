@@ -1,5 +1,5 @@
 // Suggestion library. Baby names reflect recent top UK names (ONS England &
-// Wales, most recent releases). Comedy + pet sets are curated for fun.
+// Wales), mixed with a generous helping of comedy names for good measure.
 
 export interface SuggestionGroup {
   id: string;
@@ -16,6 +16,8 @@ const GIRLS = [
   "Penelope", "Ruby", "Hallie", "Luna", "Delilah", "Margot", "Maisie", "Nova",
   "Eleanor", "Emilia", "Layla", "Aurora", "Violet", "Mila", "Molly", "Thea",
   "Hazel",
+  // comedy
+  "Chardonnay", "Khaleesi", "Beyoncé", "Moon Unit", "Sazzletits",
 ];
 
 const BOYS = [
@@ -26,14 +28,11 @@ const BOYS = [
   "Sonny", "Jaxon", "Arlo", "Ethan", "Lucas", "Joshua", "Hugo", "Grayson",
   "Alexander", "Reuben", "Frankie", "Sebastian", "Edward", "Max", "Mason",
   "Dylan",
-];
-
-const COMEDY = [
-  "Blazer", "Æ A-Xii", "BabyMcBabyFace", "Sir Loin", "Chardonnay", "Big Chungus",
-  "Gandalf", "Khaleesi", "Sausage", "Beans", "Kevin", "Barry", "Gary",
-  "Hashtag", "Nugget", "Draco", "Anakin", "Elvis", "Moon Unit", "Pilot Inspektor",
-  "Danger", "Rocket", "Biscuit", "Chad", "Nigel", "Dwayne", "Voldemort",
-  "Chairman Meow", "Bark Twain", "Sir Reginald Fluffybottom", "Beyoncé", "Kanye",
+  // comedy
+  "Blazer", "Æ A-Xii", "BabyMcBabyFace", "Count Binface", "Harry Kane",
+  "Toni Blair", "Sir Loin", "Gandalf", "Sausage", "Kevin", "Barry", "Gary",
+  "Draco", "Anakin", "Elvis", "Chad", "Nigel", "Dwayne", "Voldemort", "Kanye",
+  "Big Chungus", "Bark Twain", "Sir Reginald Fluffybottom",
 ];
 
 const PETS = [
@@ -43,11 +42,13 @@ const PETS = [
   "Meatball", "Mr Whiskers", "Fluffy", "Gizmo", "Pumpkin", "Marshmallow", "Taco",
   "Mochi", "Pepper", "Shadow", "Ghost", "Loki", "Thor", "Zeus", "Athena",
   "Winston", "Bagel",
+  // comedy
+  "Cottage", "Beans", "Nugget", "Hashtag", "Danger", "Rocket", "Chairman Meow",
+  "Pilot Inspektor",
 ];
 
 export const SUGGESTION_GROUPS: SuggestionGroup[] = [
   { id: "girls", label: "Girls", emoji: "👧", names: GIRLS },
   { id: "boys", label: "Boys", emoji: "👦", names: BOYS },
   { id: "pets", label: "Pets", emoji: "🐾", names: PETS },
-  { id: "comedy", label: "Comedy", emoji: "😜", names: COMEDY },
 ];

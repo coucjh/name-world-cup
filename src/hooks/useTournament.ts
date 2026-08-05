@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { BracketSize, NameCategory, NameEntry } from "../types";
-import { createTournament, minNamesFor, pickWinner } from "../lib/bracket";
+import type { BracketSize, NameEntry } from "../types";
+import { createTournament, pickWinner } from "../lib/bracket";
 import {
   loadShortlist,
   loadTournament,
@@ -21,7 +21,6 @@ const newId = () =>
 export function useTournament() {
   const [names, setNames] = useState<NameEntry[]>([]);
   const [size, setSize] = useState<BracketSize>(MAX_SIZE);
-  const [category, setCategory] = useState<NameCategory>("baby");
   const [tournament, setTournament] = useState<Tournament | null>(null);
   const [phase, setPhase] = useState<Phase>("shortlist");
   const hydrated = useRef(false);
@@ -32,7 +31,6 @@ export function useTournament() {
     if (shared) {
       setNames(shared.names);
       setSize(shared.size);
-      setCategory(shared.category);
       clearShareParam();
       hydrated.current = true;
       return;
@@ -43,7 +41,6 @@ export function useTournament() {
     if (savedT) {
       setTournament(savedT);
       setSize(savedT.size);
-      setCategory(savedT.category);
       setPhase(savedT.champion ? "champion" : "playing");
     }
     hydrated.current = true;
@@ -86,15 +83,14 @@ export function useTournament() {
 
   const clearAll = useCallback(() => setNames([]), []);
 
-  const minNames = minNamesFor(size);
-  const canStart = names.length >= minNames && names.length <= size;
+  const canStart = names.length === size;
   const starredCount = names.filter((n) => n.starred).length;
 
   const start = useCallback(() => {
     if (!canStart) return;
-    setTournament(createTournament(names, size, category));
+    setTournament(createTournament(names, size));
     setPhase("seeding");
-  }, [canStart, names, size, category]);
+  }, [canStart, names, size]);
 
   const finishSeeding = useCallback(() => setPhase("playing"), []);
 
@@ -116,11 +112,9 @@ export function useTournament() {
     // state
     names,
     size,
-    category,
     tournament,
     phase,
     canStart,
-    minNames,
     starredCount,
     // shortlist actions
     addName,
@@ -128,7 +122,6 @@ export function useTournament() {
     toggleStar,
     clearAll,
     setSize,
-    setCategory,
     // flow actions
     start,
     finishSeeding,

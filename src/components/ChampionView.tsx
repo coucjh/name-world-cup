@@ -30,7 +30,6 @@ export default function ChampionView({ tournament, onPlayAgain }: Props) {
         .filter(Boolean)
         .map((s) => ({ id: s!.id, name: s!.name, starred: s!.starred })),
       size: tournament.size,
-      category: tournament.category,
     });
     try {
       await navigator.clipboard.writeText(url);

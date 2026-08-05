@@ -20,11 +20,8 @@ export interface Match {
 
 export interface Tournament {
   size: BracketSize;
-  category: NameCategory;
   rounds: Match[][]; // rounds[0] = first round, last round holds the final
   currentRound: number;
   currentMatchIndex: number;
   champion?: Seeded;
 }
-
-export type NameCategory = "baby" | "pet";

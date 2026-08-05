@@ -1,21 +1,9 @@
-import type {
-  BracketSize,
-  Match,
-  NameCategory,
-  NameEntry,
-  Seeded,
-  Tournament,
-} from "../types";
+import type { BracketSize, Match, NameEntry, Seeded, Tournament } from "../types";
 import { assignSeeds, seedOrder } from "./seeding";
 
 /** The match in the next round that a given match feeds into. */
 function feed(matchIndex: number): { nextIndex: number; slot: "a" | "b" } {
   return { nextIndex: Math.floor(matchIndex / 2), slot: matchIndex % 2 === 0 ? "a" : "b" };
-}
-
-/** Number of first-round names needed to make the target bracket meaningful. */
-export function minNamesFor(size: BracketSize): number {
-  return size / 2 + 1;
 }
 
 export function roundName(roundIndex: number, totalRounds: number): string {
@@ -93,7 +81,6 @@ export function findNextPending(rounds: Match[][]): { round: number; index: numb
 export function createTournament(
   names: NameEntry[],
   size: BracketSize,
-  category: NameCategory,
   rng: () => number = Math.random
 ): Tournament {
   const seeded = assignSeeds(names.slice(0, size), rng);
@@ -101,7 +88,6 @@ export function createTournament(
   const next = findNextPending(rounds);
   return {
     size,
-    category,
     rounds,
     currentRound: next?.round ?? rounds.length - 1,
     currentMatchIndex: next?.index ?? 0,
