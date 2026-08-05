@@ -1,0 +1,53 @@
+// Suggestion library. Baby names reflect recent top UK names (ONS England &
+// Wales, most recent releases). Comedy + pet sets are curated for fun.
+
+export interface SuggestionGroup {
+  id: string;
+  label: string;
+  emoji: string;
+  names: string[];
+}
+
+const GIRLS = [
+  "Olivia", "Amelia", "Isla", "Lily", "Freya", "Ivy", "Florence", "Ava",
+  "Willow", "Mia", "Elsie", "Evie", "Isabella", "Sophia", "Grace", "Poppy",
+  "Rosie", "Ada", "Sofia", "Maya", "Daisy", "Phoebe", "Sienna", "Aria",
+  "Bonnie", "Millie", "Emily", "Charlotte", "Ella", "Harper", "Matilda",
+  "Penelope", "Ruby", "Hallie", "Luna", "Delilah", "Margot", "Maisie", "Nova",
+  "Eleanor", "Emilia", "Layla", "Aurora", "Violet", "Mila", "Molly", "Thea",
+  "Hazel",
+];
+
+const BOYS = [
+  "Muhammad", "Noah", "Oliver", "Arthur", "Leo", "George", "Theodore", "Theo",
+  "Freddie", "Archie", "Oscar", "Henry", "Jack", "Charlie", "Teddy", "Harry",
+  "Jude", "Alfie", "Finley", "Thomas", "Rory", "William", "Tommy", "Roman",
+  "Isaac", "Hudson", "Reggie", "Elijah", "Louie", "Albie", "Ronnie", "James",
+  "Sonny", "Jaxon", "Arlo", "Ethan", "Lucas", "Joshua", "Hugo", "Grayson",
+  "Alexander", "Reuben", "Frankie", "Sebastian", "Edward", "Max", "Mason",
+  "Dylan",
+];
+
+const COMEDY = [
+  "Blazer", "Æ A-Xii", "BabyMcBabyFace", "Sir Loin", "Chardonnay", "Big Chungus",
+  "Gandalf", "Khaleesi", "Sausage", "Beans", "Kevin", "Barry", "Gary",
+  "Hashtag", "Nugget", "Draco", "Anakin", "Elvis", "Moon Unit", "Pilot Inspektor",
+  "Danger", "Rocket", "Biscuit", "Chad", "Nigel", "Dwayne", "Voldemort",
+  "Chairman Meow", "Bark Twain", "Sir Reginald Fluffybottom", "Beyoncé", "Kanye",
+];
+
+const PETS = [
+  "Bella", "Luna", "Max", "Charlie", "Milo", "Cooper", "Buddy", "Daisy",
+  "Rocky", "Bailey", "Lola", "Teddy", "Coco", "Ruby", "Oscar", "Simba", "Bear",
+  "Poppy", "Ziggy", "Nala", "Biscuit", "Peanut", "Waffles", "Pickle", "Noodle",
+  "Meatball", "Mr Whiskers", "Fluffy", "Gizmo", "Pumpkin", "Marshmallow", "Taco",
+  "Mochi", "Pepper", "Shadow", "Ghost", "Loki", "Thor", "Zeus", "Athena",
+  "Winston", "Bagel",
+];
+
+export const SUGGESTION_GROUPS: SuggestionGroup[] = [
+  { id: "girls", label: "Girls", emoji: "👧", names: GIRLS },
+  { id: "boys", label: "Boys", emoji: "👦", names: BOYS },
+  { id: "pets", label: "Pets", emoji: "🐾", names: PETS },
+  { id: "comedy", label: "Comedy", emoji: "😜", names: COMEDY },
+];

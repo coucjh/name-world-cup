@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  font-family: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
+  color: #1a1614;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Warm stadium paper: halftone dots + faint pitch stripes over cream. */
+.bg-stadium {
+  background-color: #fbf3e4;
+  background-image:
+    radial-gradient(rgba(26, 22, 20, 0.06) 1.4px, transparent 1.5px),
+    radial-gradient(rgba(26, 22, 20, 0.06) 1.4px, transparent 1.5px);
+  background-size: 22px 22px;
+  background-position: 0 0, 11px 11px;
+}
+
+.text-outline {
+  -webkit-text-stroke: 2px #1a1614;
+}
+
+/* Diagonal bunting/ribbon used as section flourish. */
+.ribbon-stripes {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #ff5a3c 0 14px,
+    #f4b740 14px 28px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
