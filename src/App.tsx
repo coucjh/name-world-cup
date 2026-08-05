@@ -12,7 +12,6 @@ import ChampionView from "./components/ChampionView";
 const fade = {
   initial: { opacity: 0, y: 12 },
   animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -12 },
   transition: { duration: 0.25 },
 };
 
@@ -20,34 +19,34 @@ export default function App() {
   const t = useTournament();
   const [showBracket, setShowBracket] = useState(false);
 
+  // Each phase mounts immediately via a keyed enter animation. We deliberately
+  // avoid AnimatePresence mode="wait" here: gating the next screen on the
+  // previous screen's exit-complete callback could intermittently hang (leaving
+  // a blank screen) when the exiting screen had its own nested animations.
   return (
     <div className="bg-stadium min-h-screen">
-      <AnimatePresence mode="wait">
+      <motion.div key={t.phase} {...fade}>
         {t.phase === "shortlist" && (
-          <motion.div key="shortlist" {...fade}>
-            <ShortlistView
-              names={t.names}
-              size={t.size}
-              canStart={t.canStart}
-              starredCount={t.starredCount}
-              onAdd={t.addName}
-              onRemove={t.removeName}
-              onToggleStar={t.toggleStar}
-              onClear={t.clearAll}
-              onSetSize={t.setSize}
-              onStart={t.start}
-            />
-          </motion.div>
+          <ShortlistView
+            names={t.names}
+            size={t.size}
+            canStart={t.canStart}
+            starredCount={t.starredCount}
+            onAdd={t.addName}
+            onRemove={t.removeName}
+            onToggleStar={t.toggleStar}
+            onClear={t.clearAll}
+            onSetSize={t.setSize}
+            onStart={t.start}
+          />
         )}
 
         {t.phase === "seeding" && t.tournament && (
-          <motion.div key="seeding" {...fade}>
-            <SeedingReveal tournament={t.tournament} onDone={t.finishSeeding} />
-          </motion.div>
+          <SeedingReveal tournament={t.tournament} onDone={t.finishSeeding} />
         )}
 
         {t.phase === "playing" && t.tournament && (
-          <motion.div key="playing" {...fade} className="py-6 sm:py-10">
+          <div className="py-6 sm:py-10">
             <PlayHeader
               onBack={t.backToSquad}
               showBracket={showBracket}
@@ -78,15 +77,13 @@ export default function App() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </div>
         )}
 
         {t.phase === "champion" && t.tournament && (
-          <motion.div key="champion" {...fade}>
-            <ChampionView tournament={t.tournament} onPlayAgain={t.backToSquad} />
-          </motion.div>
+          <ChampionView tournament={t.tournament} onPlayAgain={t.backToSquad} />
         )}
-      </AnimatePresence>
+      </motion.div>
     </div>
   );
 }
@@ -129,23 +126,22 @@ function ArenaForCurrent({ t }: { t: ReturnType<typeof useTournament> }) {
   const match = round?.[tour.currentMatchIndex];
   if (!match || !match.a || !match.b) return null;
 
+  // Keyed by match id so each new matchup remounts and plays its enter
+  // animation, without gating on the previous matchup's exit.
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={match.id}
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.96 }}
-        transition={{ duration: 0.2 }}
-      >
-        <MatchupArena
-          match={match}
-          roundLabel={roundName(tour.currentRound, tour.rounds.length)}
-          matchNumber={tour.currentMatchIndex + 1}
-          matchesInRound={round.length}
-          onPick={(winnerId) => t.pick(match.id, winnerId)}
-        />
-      </motion.div>
-    </AnimatePresence>
+    <motion.div
+      key={match.id}
+      initial={{ opacity: 0, scale: 0.96 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.2 }}
+    >
+      <MatchupArena
+        match={match}
+        roundLabel={roundName(tour.currentRound, tour.rounds.length)}
+        matchNumber={tour.currentMatchIndex + 1}
+        matchesInRound={round.length}
+        onPick={(winnerId) => t.pick(match.id, winnerId)}
+      />
+    </motion.div>
   );
 }

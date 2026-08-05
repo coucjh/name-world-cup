@@ -30,9 +30,9 @@ const BOYS = [
   "Dylan",
   // comedy
   "Blazer", "Æ A-Xii", "BabyMcBabyFace", "Count Binface", "Harry Kane",
-  "Toni Blair", "Sir Loin", "Gandalf", "Sausage", "Kevin", "Barry", "Gary",
-  "Draco", "Anakin", "Elvis", "Chad", "Nigel", "Dwayne", "Voldemort", "Kanye",
-  "Big Chungus", "Bark Twain", "Sir Reginald Fluffybottom",
+  "Tonibler", "Sir Loin", "Gandalf", "Sausage", "Kevin", "Barry", "Gary",
+   "Anakin", "Harambe", "Chad", "Nigel", "Dwayne", "Keith", "Roger",
+  "Big Chungus", "Bark Twain", "Sir Alan", "Cottage",
 ];
 
 const PETS = [
@@ -43,8 +43,7 @@ const PETS = [
   "Mochi", "Pepper", "Shadow", "Ghost", "Loki", "Thor", "Zeus", "Athena",
   "Winston", "Bagel",
   // comedy
-  "Cottage", "Beans", "Nugget", "Hashtag", "Danger", "Rocket", "Chairman Meow",
-  "Pilot Inspektor",
+  "Beans", "Nugget", "Hashtag", "Danger", "Rocket", "Chairman Meow",
 ];
 
 export const SUGGESTION_GROUPS: SuggestionGroup[] = [

@@ -79,7 +79,7 @@ export default function ChampionView({ tournament, onPlayAgain }: Props) {
           onClick={onPlayAgain}
           className="inline-flex items-center gap-2 rounded-xl border-2 border-ink bg-coral px-5 py-3 font-extrabold text-white shadow-card-sm transition hover:-translate-y-0.5 active:translate-y-0"
         >
-          <RotateCcw size={18} strokeWidth={2.5} /> Run it back
+          <RotateCcw size={18} strokeWidth={2.5} /> Play Again?
         </button>
       </div>
 

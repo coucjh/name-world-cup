@@ -13,8 +13,8 @@ interface Props {
 
 function upsetLine(winner: Seeded, loser: Seeded): string {
   const gap = loser.seed - winner.seed; // negative = the underdog won
-  if (gap <= -12) return "🚨 ENORMOUS UPSET. The bracket is shaking.";
-  if (gap <= -5) return "😲 Upset! The underdog strikes.";
+  if (gap <= -12) return "🚨 GIANT KILLING. The magic of the name world cup.";
+  if (gap <= -5) return "😲 Upset! Are you okay?";
   if (Math.abs(gap) <= 1) return "🪙 Coin-flip stuff, that.";
   if (gap >= 10) return "🥱 Business as usual for the top seed.";
   return "✅ Through to the next round!";
