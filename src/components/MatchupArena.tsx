@@ -131,7 +131,7 @@ function Fighter({
         </span>
         {name.starred && <span title="Favourite">⭐</span>}
       </div>
-      <span className="font-display text-3xl leading-[0.95] sm:text-5xl">{name.name}</span>
+      <span className="break-words font-display text-3xl leading-[0.95] sm:text-5xl">{name.name}</span>
       {state === "won" && (
         <motion.span
           initial={{ scale: 0 }}

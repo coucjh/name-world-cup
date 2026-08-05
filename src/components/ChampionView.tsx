@@ -59,7 +59,7 @@ export default function ChampionView({ tournament, onPlayAgain }: Props) {
         initial={{ opacity: 0, y: 20, scale: 0.8 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ delay: 0.15, type: "spring", stiffness: 200, damping: 16 }}
-        className="my-2 font-display text-7xl leading-none text-grass sm:text-8xl"
+        className="my-2 break-words font-display text-5xl leading-none text-grass sm:text-8xl"
       >
         {champ.name}
       </motion.h1>
